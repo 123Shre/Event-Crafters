@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 import "./App.css";
-import Chakra from "./assets/Chakra";
+import EventForm from "./Components/Event Creater/EventForm";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Chakra />
+      <EventForm />
     </>
   );
 }

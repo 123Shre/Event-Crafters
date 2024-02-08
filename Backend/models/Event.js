@@ -1,50 +1,43 @@
 import { Schema, model } from "mongoose";
 
-const Event = new Schema({
+const eventSchema = new Schema({
+  images: [String], // Array of image URLs
   name: {
     type: String,
     required: true,
   },
-  eventDate: {
+  description: {
     type: String,
     required: true,
   },
-  eventTime: {
+  organizerName: {
     type: String,
     required: true,
   },
-  eventDuration: {
+  ageRestrictions: {
     type: String,
     required: true,
   },
-  eventDescription: {
+  dateAndTime: {
     type: String,
     required: true,
   },
-  eventLocation: {
+  priceType: {
     type: String,
     required: true,
+    enum: ["Free", "Paid"], // Ensures priceType is either "Free" or "Paid"
   },
-  eventCategory: {
-    type: String,
-    required: true,
-  },
-  eventImage: {
-    type: String,
-    required: true,
-  },
-  eventCreator: {
-    type: String,
-    required: true,
-  },
-  eventCreatorEmail: {
-    type: String,
-    required: true,
-  },
-  eventTicketPrice: {
+  price: String, // Optional if priceType is "Paid"
+  contracts: [{
+    serviceName: String,
+    quotation: Number, // Assuming this is a numeric value
+  }],
+  address: {
     type: String,
     required: true,
   },
 });
-const Event_Schema = model("Event_Schema", Event);
-export default Event_Schema;
+
+const Event = model("Event", eventSchema);
+
+export default Event;
