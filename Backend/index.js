@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { connect } from "mongoose";
 import eventCreater from "./routes/eventCreater.routes.js";
+import loginreg from "./routes/loginregistration.routes.js";
 import multer from "multer";
 const app = express();
 app.use(cors());
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads')); 
 
 app.use("/eventcreater",eventCreater)
+app.use("/loginreg",loginreg)
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

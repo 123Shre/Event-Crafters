@@ -68,133 +68,187 @@ const EventForm = () => {
   };
 
   return (
-    <div className="event-form">
-      <h1 className="text-3xl font-bold mb-4">Event Creation Form</h1>
+    <div className="event-form border-2 border-yellow-900 ml-6 mr-6 mt-1">
+      <h1 className="text-4xl font-bold text-center mt-2 mb-4">Event Creation Form</h1>
       <form className="bg-white p-4 rounded shadow-md">
         <div className="grid grid-cols-2 gap-4">
           {/* First Column */}
           <div>
             {/* Event Name */}
-            <label className="block mb-2">
-              Event Name:
+
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="name"
                 value={eventData.name}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               />
-            </label>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Event Name
+              </label>
+            </div>
+
             {/* Organizer's Name */}
-            <label className="block mb-2">
-              Organizer's Name:
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="organizerName"
                 value={eventData.organizerName}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               />
-            </label>
-            <label className="block mb-2">
-              Upload Images:
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Organizer's Name
+              </label>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="file"
                 name="images"
                 accept="image/*"
                 multiple
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleImageChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
+                required
               />
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Upload Image
+              </label>
               <div>
                 {eventData.images.map((file, index) => (
                   <div key={index}>{file.name}</div>
                 ))}
               </div>
-            </label>
+            </div>
 
             {/* Age Restrictions */}
-            <label className="block mb-2">
-              Age Restrictions:
+
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="ageRestrictions"
                 value={eventData.ageRestrictions}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               />
-            </label>
-          </div>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Age Restrictions
+              </label>
+            </div>
 
-          {/* Second Column */}
-          <div>
             {/* Date and Time */}
-            <label className="block mb-2">
-              Date and Time:
+
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="dateAndTime"
                 value={eventData.dateAndTime}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none = dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               />
-            </label>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Date and Time
+              </label>
+            </div>
+          </div>
+
+          {/* Second Column */}
+          <div>
             {/* Description */}
-            <label className="block mb-2">
-              Description:
+            <div className="relative z-0 w-full mb-5 group">
               <textarea
+                rows="2"
+                type="text"
                 name="description"
                 value={eventData.description}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
-                rows="1"
+                placeholder=" "
+                required
               />
-            </label>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Description
+              </label>
+            </div>
 
             {/* Price Type */}
-            <label className="block mb-2">
-              Price Type:
+
+            <div className="relative z-0 w-full mb-5 group">
               <select
                 name="priceType"
                 value={eventData.priceType}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               >
                 <option value="Free">Free</option>
                 <option value="Paid">Paid</option>
               </select>
-            </label>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Price Type
+              </label>
+            </div>
             {eventData.priceType === "Paid" && (
-              <label className="block mb-2">
-                Price:
+              <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="text"
                   name="price"
                   value={eventData.price}
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  placeholder=" "
                   required
                 />
-              </label>
+                <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                  Price
+                </label>
+              </div>
             )}
 
             {/* Address */}
-            <label className="block mb-2">
-              Address:
+
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
                 name="address"
                 value={eventData.address}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+                placeholder=" "
                 required
               />
-            </label>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Address
+              </label>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="text"
+                name="dateAndTime"
+                value={eventData.dateAndTime}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                onChange={handleChange}
+                placeholder=" "
+                required
+              />
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Date and Time
+              </label>
+            </div>
+
             {eventData.address && (
               <p>
                 <a
@@ -219,35 +273,44 @@ const EventForm = () => {
               <button
                 type="button"
                 onClick={() => handleDeleteContract(index)}
-                className="bg-red-500 text-white px-4 py-2 rounded mt-2"
+                className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
               >
                 Delete
               </button>
             </div>
           ))}
           {/* Add Contract Fields */}
-          <label className="block mb-2">
-            Service Name:
+        
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
               name="serviceName"
               value={eventData.serviceName}
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+              placeholder=" "
               required
             />
-          </label>
-          <label className="block mb-2">
-            Quotation:
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Service Name
+            </label>
+          </div>
+
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="number"
               name="quotation"
               value={eventData.quotation}
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded mt-1"
+              placeholder=" "
               required
             />
-          </label>
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Quotation
+            </label>
+          </div>
+
           <button
             type="button"
             onClick={() =>
@@ -264,7 +327,7 @@ const EventForm = () => {
                 quotation: "",
               }))
             }
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+            className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Add Contract
           </button>
@@ -275,10 +338,12 @@ const EventForm = () => {
           <button
             type="submit"
             onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+            className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Submit
           </button>
+
+         
         </div>
       </form>
     </div>
