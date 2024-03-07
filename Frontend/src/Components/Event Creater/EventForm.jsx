@@ -41,7 +41,10 @@ const EventForm = () => {
     e.preventDefault();
     try {
       // Submit event data to backend API
-      await axios.post("http://localhost:5000/api/events", eventData);
+      await axios.post(
+        "http://localhost:3000/eventcreater/event_create",
+        eventData
+      );
 
       // Clear form data after successful submission
       setEventData({
@@ -166,6 +169,19 @@ const EventForm = () => {
                 <option value="Paid">Paid</option>
               </select>
             </label>
+            {eventData.priceType === "Paid" && (
+              <label className="block mb-2">
+                Price:
+                <input
+                  type="text"
+                  name="price"
+                  value={eventData.price}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  required
+                />
+              </label>
+            )}
 
             {/* Address */}
             <label className="block mb-2">
@@ -179,6 +195,17 @@ const EventForm = () => {
                 required
               />
             </label>
+            {eventData.address && (
+              <p>
+                <a
+                  href={generateMapLink(eventData.address)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on Google Maps
+                </a>
+              </p>
+            )}
           </div>
         </div>
 

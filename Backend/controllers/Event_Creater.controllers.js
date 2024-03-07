@@ -1,6 +1,7 @@
 import Event_Creater_Schema from "../models/Event-Creater.js";
 import bcrypt from "bcrypt";
 import { generateAccessToken } from "../middleware/authtoken.js";
+import Event from "../models/Event.js";
 
 const eventCreatorControllers = {
   registration: async (req, res) => {
