@@ -77,20 +77,51 @@ const eventCreatorControllers = {
   },
   createEvent: async (req, res) => {
     try {
-      const images = req.files.map((file) => file.path); // Get paths of uploaded images
-      const eventData = { ...req.body, images };
-      const event = new Event(eventData);
-      await event.save();
-      res
-        .status(201)
-        .json({ success: true, message: "Event created successfully" });
-    } catch (error) {
-      console.error("Error creating event:", error);
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
+      console.log(req.body)
+      const {
+        address,
+
+        ageRestrictions,
+        cityName,
+        // contracts,
+        dateAndTime,
+        description,
+        name,
+        organizerName,
+        price,
+        priceType,
+      } = req.body;
+
+      if (!req.files || !req.files.images) {
+        return res.status(400).json({ error: "Please upload images" });
+      }
+      const images = req.files.images.map((file) => file.filename);
+
+      const event = new Event({
+        address,
+        ageRestrictions,
+        cityName,
+        // contracts,
+        dateAndTime,
+        description,
+        images,
+        name,
+        organizerName,
+        price,
+        priceType,
+      });
+
+      const savedEvent = await event.save();
+      res.status(201).json(savedEvent);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
     }
   },
 };
 
 export default eventCreatorControllers;
+// Convert image files to binary format
+// const images = req.files.map((file) => ({
+//   data: file.buffer,
+//   contentType: file.mimetype,
+// }));

@@ -4,7 +4,7 @@ import { SocialIcon } from 'react-social-icons';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gray-800 text-white py-8" style={{background:"#094962"}}>
       <div className="container mx-auto max-w-screen-xl flex flex-wrap justify-between">
         {/* About Us section */}
        

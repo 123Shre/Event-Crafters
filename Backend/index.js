@@ -3,6 +3,7 @@ import cors from "cors";
 import { connect } from "mongoose";
 import eventCreater from "./routes/eventCreater.routes.js";
 import loginreg from "./routes/loginregistration.routes.js";
+import serviceprovider from "./routes/serviceprovider.routes.js";
 import multer from "multer";
 const app = express();
 app.use(cors());
@@ -18,23 +19,24 @@ connect(uri)
 app.use(express.json());
 
 // Multer storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Destination folder for storing uploaded files
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); 
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/"); // Destination folder for storing uploaded files
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 // Middleware
 app.use(express.json());
-app.use('/uploads', express.static('uploads')); 
+app.use("/uploads", express.static("uploads"));
 
-app.use("/eventcreater",eventCreater)
-app.use("/loginreg",loginreg)
+app.use("/eventcreater", eventCreater);
+app.use("/loginreg", loginreg);
+app.use("/sp", serviceprovider);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

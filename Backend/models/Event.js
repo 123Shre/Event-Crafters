@@ -1,7 +1,14 @@
 import { Schema, model } from "mongoose";
 
 const eventSchema = new Schema({
-  images: [String], // Array of image URLs
+  // images: [
+  //   {
+  //     data: { type: Buffer, required: true },
+  //     contentType: { type: String, required: true },
+  //   },
+  // ], // Array of image URLs
+
+  images: [String],
   name: {
     type: String,
     required: true,
@@ -28,10 +35,12 @@ const eventSchema = new Schema({
     enum: ["Free", "Paid"], // Ensures priceType is either "Free" or "Paid"
   },
   price: String, // Optional if priceType is "Paid"
-  contracts: [{
-    serviceName: String,
-    quotation: Number, // Assuming this is a numeric value
-  }],
+  // contracts: [
+  //   {
+  //     serviceName: String,
+  //     quotation: Number, // Assuming this is a numeric value
+  //   },
+  // ],
   address: {
     type: String,
     required: true,

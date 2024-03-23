@@ -68,8 +68,10 @@ const EventForm = () => {
   };
 
   return (
-    <div className="event-form border-2 border-yellow-900 ml-6 mr-6 mt-1">
-      <h1 className="text-4xl font-bold text-center mt-2 mb-4">Event Creation Form</h1>
+    <div className="event-form shadow-2xl rounded-2xl ml-6 mr-6 mt-1">
+      <h1 className="text-4xl font-bold text-center mt-2 mb-4">
+        Event Creation Form
+      </h1>
       <form className="bg-white p-4 rounded shadow-md">
         <div className="grid grid-cols-2 gap-4">
           {/* First Column */}
@@ -144,12 +146,12 @@ const EventForm = () => {
                 Age Restrictions
               </label>
             </div>
+          </div>
 
-            {/* Date and Time */}
-
+          <div>
             <div className="relative z-0 w-full mb-5 group">
               <input
-                type="text"
+                type="datetime-local"
                 name="dateAndTime"
                 value={eventData.dateAndTime}
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none = dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -161,14 +163,10 @@ const EventForm = () => {
                 Date and Time
               </label>
             </div>
-          </div>
-
-          {/* Second Column */}
-          <div>
             {/* Description */}
             <div className="relative z-0 w-full mb-5 group">
               <textarea
-                rows="2"
+                row="1"
                 type="text"
                 name="description"
                 value={eventData.description}
@@ -234,21 +232,6 @@ const EventForm = () => {
               </label>
             </div>
 
-            <div className="relative z-0 w-full mb-5 group">
-              <input
-                type="text"
-                name="dateAndTime"
-                value={eventData.dateAndTime}
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                onChange={handleChange}
-                placeholder=" "
-                required
-              />
-              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                Date and Time
-              </label>
-            </div>
-
             {eventData.address && (
               <p>
                 <a
@@ -280,7 +263,7 @@ const EventForm = () => {
             </div>
           ))}
           {/* Add Contract Fields */}
-        
+
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
@@ -342,8 +325,6 @@ const EventForm = () => {
           >
             Submit
           </button>
-
-         
         </div>
       </form>
     </div>

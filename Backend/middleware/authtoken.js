@@ -9,12 +9,12 @@ export const generateAccessToken = (user) => {
     { userId: user._id, email: user.email },
     secret,
     {
-      expiresIn: "1h", // Token expiration time
+      expiresIn: "15min", // Token expiration time
     }
   );
 };
 // export default generateAccessToken;
-export const eventCreaterAuthMiddleware = (req, res, next) => {
+export const AuthMiddleware = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
