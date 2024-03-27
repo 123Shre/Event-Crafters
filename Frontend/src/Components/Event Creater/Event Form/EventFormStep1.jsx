@@ -78,7 +78,7 @@ const EventFormStep1 = ({ eventData, setEventData, handleNext }) => {
           </label>
         </div>
 
-        <div className="relative z-0 w-full mb-5 group">
+        {/* <div className="relative z-0 w-full mb-5 group">
           <input
             type="file"
             name="images"
@@ -96,8 +96,8 @@ const EventFormStep1 = ({ eventData, setEventData, handleNext }) => {
             {eventData.images.map((file, index) => (
               <div key={index}>{file.name}</div>
             ))}
-          </div> */}
-        </div>
+          </div> 
+        </div> */}
 
         {/* Age Restrictions */}
         <div className="relative z-0 w-full mb-5 group">

@@ -3,10 +3,10 @@ import User_Schema from "../models/registration.js";
 import bcrypt from "bcrypt";
 
 const RegistrationControllers = {
-    register: async (req, res) => {
-    const { name, email, password ,cpassword } = req.body;
+  register: async (req, res) => {
+    const { name, email, password, cpassword } = req.body;
     try {
-      const userExist = await User_Schema.find({email});
+      const userExist = await User_Schema.find({ email });
       if (!userExist) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -20,17 +20,24 @@ const RegistrationControllers = {
         password: hashedPassword,
       });
       //res.send("Register Successfully");
-      res.status(201).json({ message: "User created" ,status: 201});
+      res.status(201).json({ message: "User created", status: 201 });
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Internal Server Error" });
+      if (error.code === 11000) {
+        // Handle duplicate key error specifically
+        return res
+          .status(400)
+          .json({ message: "User with this email already exists" });
+      } else {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
+      }
     }
   },
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      console.log(email,"  ",password);
-      const user = await User_Schema.findOne({email});
+      console.log(email, "  ", password);
+      const user = await User_Schema.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: "User Not found" });
       }
@@ -39,8 +46,8 @@ const RegistrationControllers = {
         return res.status(404).json({ message: "Password is incorrect" });
       }
       const accessToken = generateAccessToken(user);
-     
-      res.status(200).json({ status: "ok", message: "Success", accessToken});
+
+      res.status(200).json({ status: "ok", message: "Success", accessToken });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -59,7 +66,6 @@ const RegistrationControllers = {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
-  
+  },
 };
 export default RegistrationControllers;

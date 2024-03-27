@@ -29,18 +29,22 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+  cityName: {
+    type: String,
+    required: true,
+  },
   priceType: {
     type: String,
     required: true,
     enum: ["Free", "Paid"], // Ensures priceType is either "Free" or "Paid"
   },
   price: String, // Optional if priceType is "Paid"
-  // contracts: [
-  //   {
-  //     serviceName: String,
-  //     quotation: Number, // Assuming this is a numeric value
-  //   },
-  // ],
+  contracts: [
+    {
+      serviceName: String,
+      quotation: Number, // Assuming this is a numeric value
+    },
+  ],
   address: {
     type: String,
     required: true,

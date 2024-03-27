@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Button, Typography, Grid } from "@mui/material";
-import { useCart } from "../../Context/CartContext";
+// import { useCart } from "../../Context/CartContext";
 
 const DetailEventCard = () => {
-  const { addTocart } = useCart();
+  // const { addTocart } = useCart();
   const handleAddToCart=()=>{
 
   }

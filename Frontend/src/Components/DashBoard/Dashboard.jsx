@@ -85,12 +85,12 @@ const DashBoard = () => {
                 </ListItemIcon>
                 <ListItemText primary="Home" className="cursor-pointer" />
               </ListItem>
-              <ListItem className="hover:bg-gray-100 dark:hover:bg-gray-800/40">
+              {/* <ListItem className="hover:bg-gray-100 dark:hover:bg-gray-800/40">
                 <ListItemIcon>
                   <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Events" className="cursor-pointer" />
-              </ListItem>
+              </ListItem> */}
               <ListItem
                 onClick={onClickservice}
                 className="hover:bg-gray-100 dark:hover:bg-gray-800/40"

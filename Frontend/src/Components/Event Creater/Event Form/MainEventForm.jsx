@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Stepper, Step, StepLabel, Button, Box } from "@mui/material";
+import { Stepper, Step, StepLabel, Button, Box, Alert } from "@mui/material";
 import EventFormStep1 from "./EventFormStep1";
 import EventFormStep2 from "./EventFormStep2";
 import EventFormStep3 from "./EventFormStep3";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 const steps = ["Basic Information", "Additional Details", "Contracts"];
+
+const SuccessAlert = () => {
+  return (
+    <>
+      <Alert variant="filled" severity="success">
+        This is a filled success Alert.
+      </Alert>
+      ;
+    </>
+  );
+};
 
 const MainEventForm = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -25,6 +37,8 @@ const MainEventForm = () => {
     address: "",
   });
   const [openAlert, setOpenAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleNext = () => {
     // Check if any required fields are empty
@@ -35,7 +49,7 @@ const MainEventForm = () => {
       "cityName",
     ];
     const emptyFields1 = requiredFields1.filter((field) => !eventData[field]);
-    const requiredFields2 = ["dateAndTime", "description",  "address"];
+    const requiredFields2 = ["dateAndTime", "description", "address"];
     const emptyFields2 = requiredFields2.filter((field) => !eventData[field]);
 
     if (activeStep === 0 && emptyFields1.length > 0) {
@@ -51,20 +65,21 @@ const MainEventForm = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Perform form submission logic here, such as sending data to a server
-    console.log("Form submitted:", eventData);
-    const request = axios
+
+    const request = await axios
       .post("http://localhost:3000/eventCreater/event_create", eventData)
       .then((res) => {
         console.log("Form submitted successfully: ", res.data);
-        // window.location.reload();
+        setSuccessAlert(true);
+        navigate("/event-creater");
       })
       .catch((err) => {
         console.error("Error while submitting form: ", err);
       });
   };
-
+  console.log(successAlert);
   const handleCloseAlert = () => {
     setOpenAlert(false);
   };
@@ -103,62 +118,66 @@ const MainEventForm = () => {
   };
 
   return (
-    <div className="event-form shadow-2xl rounded-2xl ml-6 mr-6 max-h-fit mt-1 pb-14">
-      <h1 className="text-4xl font-bold text-center mt-2 ">
-        Event Creation Form
-      </h1>
-      <div className="mb-2">
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
-      {getStepContent(activeStep)}
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-        <Button
-          disabled={activeStep === 0}
-          onClick={handleBack}
-          sx={{ mr: 1 }}
-          variant="contained"
-        >
-          ⬅Back
-        </Button>
-        {activeStep === steps.length - 1 ? (
+    <>
+      {successAlert && <SuccessAlert />}
+     
+      <div className="event-form shadow-2xl rounded-2xl ml-6 mr-6 max-h-fit mt-1 pb-14">
+        <h1 className="text-4xl font-bold text-center mt-2 ">
+          Event Creation Form
+        </h1>
+        <div className="mb-2">
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {getStepContent(activeStep)}
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
           <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            sx={{ mr: 1 }}
             variant="contained"
-            onClick={handleSubmit} // Trigger the submit function on the last step
-            sx={{ ml: 1 }}
           >
-            Submit
+            ⬅Back
           </Button>
-        ) : (
-          <Button
-            variant="contained"
-            onClick={handleNext}
-            sx={{ ml: 1 }}
-            disabled={activeStep === steps.length - 1}
-          >
-            Next➡
-          </Button>
-        )}
-      </Box>
-      <Snackbar
-        open={openAlert}
-        autoHideDuration={6000}
-        onClose={handleCloseAlert}
-      >
-        <MuiAlert
+          {activeStep === steps.length - 1 ? (
+            <Button
+              variant="contained"
+              onClick={handleSubmit} // Trigger the submit function on the last step
+              sx={{ ml: 1 }}
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={handleNext}
+              sx={{ ml: 1 }}
+              disabled={activeStep === steps.length - 1}
+            >
+              Next➡
+            </Button>
+          )}
+        </Box>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
           onClose={handleCloseAlert}
-          severity="error"
-          sx={{ width: "100%" }}
         >
-          Please fill in all required fields.
-        </MuiAlert>
-      </Snackbar>
-    </div>
+          <MuiAlert
+            onClose={handleCloseAlert}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Please fill in all required fields.
+          </MuiAlert>
+        </Snackbar>
+      </div>
+    </>
   );
 };
 

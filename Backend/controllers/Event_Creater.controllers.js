@@ -77,13 +77,12 @@ const eventCreatorControllers = {
   },
   createEvent: async (req, res) => {
     try {
-      console.log(req.body)
+      console.log(req.body);
       const {
         address,
-
         ageRestrictions,
         cityName,
-        // contracts,
+        contracts,
         dateAndTime,
         description,
         name,
@@ -92,19 +91,19 @@ const eventCreatorControllers = {
         priceType,
       } = req.body;
 
-      if (!req.files || !req.files.images) {
-        return res.status(400).json({ error: "Please upload images" });
-      }
-      const images = req.files.images.map((file) => file.filename);
+      // if (!req.files || !req.files.images) {
+      //   return res.status(400).json({ error: "Please upload images" });
+      // }
+      // const images = req.files.images.map((file) => file.filename);
 
       const event = new Event({
         address,
         ageRestrictions,
         cityName,
-        // contracts,
+        contracts,
         dateAndTime,
         description,
-        images,
+        // images,
         name,
         organizerName,
         price,
@@ -115,6 +114,23 @@ const eventCreatorControllers = {
       res.status(201).json(savedEvent);
     } catch (err) {
       res.status(400).json({ error: err.message });
+    }
+  },
+  allevents: async (req, res) => {
+    try {
+      const events = await Event.find();
+      res.status(200).json(events);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+  allcontracts: async (req, res) => {
+    try {
+      const events = await Event.find().populate("contracts"); // Populate 'contracts' field
+      res.json(events);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      res.status(500).json({ error: "Failed to fetch events" });
     }
   },
 };

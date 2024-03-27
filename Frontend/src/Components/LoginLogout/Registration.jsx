@@ -3,14 +3,42 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-const SuccessAlert = () => (
-  <div
-    className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:text-green-400"
-    role="alert"
-  >
-    <span className="font-medium"> Registration Successful.</span>
-  </div>
-);
+const SuccessAlert = () => {
+  return (
+    <>
+      <div
+        className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:text-green-400"
+        role="alert"
+      >
+        <span className="font-medium"> Registration Successful.</span>
+      </div>
+    </>
+  );
+};
+const UserErrorAlert = () => {
+  return (
+    <>
+      <div
+        className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-400"
+        role="alert"
+      >
+        <span className="font-medium"> User Already Exist</span>
+      </div>
+    </>
+  );
+};
+const ErrorAlert = () => {
+  return (
+    <>
+      <div
+        className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-400"
+        role="alert"
+      >
+        <span className="font-medium"> Registration Unsuccessfull</span>
+      </div>
+    </>
+  );
+};
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -21,6 +49,8 @@ const Registration = () => {
     cpassword: "",
   });
   const [showAlert, setShowAlert] = useState(false);
+  const [usererrorAlert, setUserErrorAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,12 +96,12 @@ const Registration = () => {
     }
 
     try {
-      console.log(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.cpassword
-      );
+      // console.log(
+      //   formData.name,
+      //   formData.email,
+      //   formData.password,
+      //   formData.cpassword
+      // );
       const response = await axios.post(
         "http://localhost:3000/loginreg/register",
         formData
@@ -83,20 +113,26 @@ const Registration = () => {
         cpassword: "",
       });
       const data = response.data;
-      console.log(data);
+      // console.log(data);
       if (data.status === 201) {
         setShowAlert(true);
         // console.log("Registration Successful", data);
         navigate("/login");
       }
     } catch (error) {
-      console.log("Registration Failed", error);
+      if (error.response.message === "User with this email already exists") {
+        setUserErrorAlert(true);
+      } else {
+        console.log("Registration Failed", error);
+      }
     }
   };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
+      {usererrorAlert && <UserErrorAlert />}
+      {errorAlert && <ErrorAlert />}
       {showAlert && <SuccessAlert />}
       <div className="mx-auto max-w-sm space-y-6 shadow-2xl rounded-lg p-8 relative top-8">
         <form onSubmit={handleSubmit}>
@@ -125,7 +161,10 @@ const Registration = () => {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-500">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-500"
+            >
               Email
             </label>
             <input
@@ -138,9 +177,10 @@ const Registration = () => {
               placeholder="m@example.com"
               required
             />
-            {formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) && (
-              <span className="text-red-500">Invalid email address</span>
-            )}
+            {formData.email &&
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) && (
+                <span className="text-red-500">Invalid email address</span>
+              )}
           </div>
           <div className="space-y-2">
             <label

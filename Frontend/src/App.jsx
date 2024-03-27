@@ -17,38 +17,52 @@ import Card from "./Components/Event Creater/EventCard2";
 import EventCarousal from "./Components/Landing_Page/Events List/EventCarousal";
 import AutoPlay from "./Components/Landing_Page/Events List/EventCarousal";
 import DashBoard from "./Components/DashBoard/Dashboard";
-import ServiceProviderRegistrationForm from "./Components/LoginLogout/SPForm";
 import ServiceProviderForm from "./Components/Service Provider/ServiceProviderInfo";
-import DetailEventCard from "./Components/Event Creater/DetailEventCard";
-import EventFormStep1 from "./Components/Event Creater/Event Form/EventFormStep1";
-import EventFormStep2 from "./Components/Event Creater/Event Form/EventFormStep2";
-import EventFormStep3 from "./Components/Event Creater/Event Form/EventFormStep3";
+// import DetailEventCard from "./Components/Event Creater/DetailEventCard";
 import MainEventForm from "./Components/Event Creater/Event Form/MainEventForm";
 import Navbar from "./Components/Navbar/Navbar";
+import DetailEventCard2 from "./Components/Event Creater/DetailEvent2";
+import Cart from "./Components/Event Attendee/Cart";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import Success from "./Components/Final Pages/Success";
+import Failed from "./Components/Final Pages/Failed";
+// import { config } from "dotenv";
+const stripePromise = loadStripe(
+  "pk_test_51OyakHSE0pec6OUZ4SPFZmDvcA9KbhJTqU51aSC9tDFMFGRnCD6VesQBWOEaMAxueMhsbT4rnkufvRYLSOfNas7200jRP7SYOi"
+);
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Routes>
-        <Route path="/form" element={<EventForm />} />
-        <Route path="/events/*" element={<Eventslist />} />
-        {/* <Route path="/spreg" element={<ServiceProviderRegistrationForm />} /> */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/foo" element={<Footer />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/fpwd" element={<ForgotPassword />} />
-        <Route path="/card" element={<Card />} />
-        <Route path="/cardcar" element={<EventCarousal />} />
-        <Route path="/dash" element={<DashBoard />} />
-        <Route path="/spreg" element={<ServiceProviderForm />} />
-        <Route path="/devent" element={<DetailEventCard />} />
-        <Route path="/navbar" element={<Navbar />} />
-        <Route path="/ev1" element={<MainEventForm />} />
-      </Routes>
+      <Elements stripe={stripePromise}>
+        <Routes>
+          <Route path="/form" element={<EventForm />} />
+          <Route path="/events/*" element={<Eventslist />} />
+          {/* <Route path="/spreg" element={<ServiceProviderRegistrationForm />} /> */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/foo" element={<Footer />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/fpwd" element={<ForgotPassword />} />
+          <Route path="/card" element={<Card />} />
+          <Route path="/cardcar" element={<EventCarousal />} />
+          <Route path="/dash" element={<DashBoard />} />
+          <Route path="/spreg" element={<ServiceProviderForm />} />
+          {/* <Route path="/devent" element={<DetailEventCard />} /> */}
+          <Route path="/navbar" element={<Navbar />} />
+          <Route path="/ev1" element={<MainEventForm />} />
+          <Route path="/de2" element={<DetailEventCard2 />} />
+          <Route path="/cart" element={<Cart />} />
+
+
+          <Route path="/success" element={<Success />} />
+          <Route path="/failed" element={<Failed />} />
+        </Routes>
+      </Elements>
     </>
   );
 }

@@ -6,6 +6,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
+  const islanding = location.pathname === "/";
   const isLoginPage = location.pathname === "/login";
   const isAboutPage = location.pathname === "/about";
   const isRegistrationPage = location.pathname === "/register";
@@ -14,7 +15,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
-
+  console.log(isLoggedIn);
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
@@ -32,11 +33,13 @@ const Navbar = () => {
           <div className="relative flex items-center justify-between h-16">
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex-shrink-0 flex items-center">
-                <img
-                  className="hidden lg:block h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                  alt="Event Crafter"
-                />
+                <Link to="/">
+                  <img
+                    className="hidden lg:block h-8 w-auto"
+                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                    alt="Event Crafter"
+                  />
+                </Link>
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
@@ -46,7 +49,7 @@ const Navbar = () => {
                   >
                     Dashboard
                   </a>
-                  {isAboutPage && (
+                  {!isAboutPage && (
                     <a
                       href="/about"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -54,7 +57,7 @@ const Navbar = () => {
                       About Us
                     </a>
                   )}
-                  <a
+                  {/* <a
                     href="#"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
@@ -65,7 +68,7 @@ const Navbar = () => {
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Calendar
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -140,6 +143,23 @@ const Navbar = () => {
                       Register
                     </Link>
                   )}
+                </div>
+              )}
+              {islanding && (
+                <div className="flex items-center">
+                  <Link
+                    to="/login"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/register"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Register
+                  </Link>
                 </div>
               )}
             </nav>
