@@ -36,7 +36,7 @@ const RegistrationControllers = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      console.log(email, "  ", password);
+      // console.log(email, "  ", password);
       const user = await User_Schema.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: "User Not found" });
@@ -66,6 +66,9 @@ const RegistrationControllers = {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
+  },
+  profile: async (req, res) => {
+    
   },
 };
 export default RegistrationControllers;

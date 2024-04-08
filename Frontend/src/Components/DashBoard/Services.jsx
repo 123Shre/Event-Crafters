@@ -1,18 +1,25 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Contracts from "../Service Provider/Contracts";
 
 const Services = () => {
   const [isRegistered, setIsRegistered] = useState(false);
-  const request =axios.post
+  
 
   return (
-    <div>
-      <button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><Link to="/spreg">
-      Create Service Info
-      </Link></button>
-    </div>
-  )
-}
+    <>
+      <div>
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          <Link to="/spreg">Create Service Info</Link>
+        </button>
+      </div>
+      <Contracts/>
+    </>
+  );
+};
 
-export default Services
+export default Services;

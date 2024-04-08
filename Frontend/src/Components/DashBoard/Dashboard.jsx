@@ -19,16 +19,20 @@ import {
   CardContent,
   Button,
 } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
-import EventIcon from "@mui/icons-material/Event";
+// import EventIcon from "@mui/icons-material/Event";
 import BuildIcon from "@mui/icons-material/Build";
 import PeopleIcon from "@mui/icons-material/People";
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 import { Link } from "react-router-dom";
 import Home from "./Home";
 import Services from "./Services";
 import Attendee from "./Attendee";
 import Navbar from "../Navbar/Navbar";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import ReviewEvent from "./Review";
 
 const INITIAL_STATE = {
   anchorEl: null, // State to control the Avatar menu
@@ -46,6 +50,9 @@ const DashBoard = () => {
   const onClickattendee = () => {
     setPage("Attendee");
   };
+  const onClickreview = () => {
+   setPage("Review");
+  };
   const handleMenuOpen = (event) => {
     setState({ anchorEl: event.currentTarget });
   };
@@ -53,9 +60,14 @@ const DashBoard = () => {
   const handleMenuClose = () => {
     setState({ anchorEl: null });
   };
+  const navigateToAttendeePage = () => {
+    setPage("Attendee");
+    navigate("/de");
+  };
+  
   return (
     <>
-    
+    <Navbar/>
       <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
         <Drawer
           variant="permanent"
@@ -71,8 +83,7 @@ const DashBoard = () => {
           <div className="flex h-full max-h-screen flex-col">
             <div className="flex items-center border-b px-6 h-[60px]">
               <Link className="flex items-center gap-2 font-semibold" href="#">
-                <BuildIcon className="h-6 w-6" />
-                <span>Acme Inc</span>
+                <span>Event Crafters</span>
               </Link>
             </div>
             <List className="flex-1 overflow-auto py-2">
@@ -109,6 +120,15 @@ const DashBoard = () => {
                 </ListItemIcon>
                 <ListItemText primary="Attendees" className="cursor-pointer" />
               </ListItem>
+              <ListItem
+                onClick={onClickreview}
+                className="hover:bg-gray-100 dark:hover:bg-gray-800/40"
+              >
+                <ListItemIcon>
+                  <RateReviewIcon />
+                </ListItemIcon>
+                <ListItemText primary="Reviews" className="cursor-pointer" />
+              </ListItem>
             </List>
           </div>
         </Drawer>
@@ -125,33 +145,19 @@ const DashBoard = () => {
                 <BuildIcon />
               </Link>
               <div className="w-full flex-1"></div>
-              <IconButton>
-                <Avatar
-                  alt="Avatar"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                />
-              </IconButton>
-              {state.anchorEl && (
-                <Menu
-                  anchorEl={state.anchorEl}
-                  open={Boolean(state.anchorEl)}
-                  onClose={handleMenuClose}
-                >
-                  <MenuItem>Settings</MenuItem>
-                  <MenuItem>Support</MenuItem>
-                  <Divider />
-                  <MenuItem>Logout</MenuItem>
-                </Menu>
-              )}
+                        
+              <Link to="/cart">
+                <IconButton>
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Link>
+             
             </Toolbar>
           </AppBar>
           {page === "Home" && <Home />}
           {page === "Service" && <Services />}
           {page === "Attendee" && <Attendee />}
+          {page === "Review" && <ReviewEvent />}
         </div>
       </div>
     </>

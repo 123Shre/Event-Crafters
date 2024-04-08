@@ -4,4 +4,5 @@ import Service_Provider_Controllers from "../controllers/Service_Provider.contro
 
 const router = Router();
 router.post("/spform", Service_Provider_Controllers.serviceform);
+router.post("/submitquotation", Service_Provider_Controllers.submitQuotation);
 export default router;

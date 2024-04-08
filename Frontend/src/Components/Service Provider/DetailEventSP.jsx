@@ -1,9 +1,8 @@
 import React from "react";
 import { useCart } from "../../Context/CartContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const DetailEventCard2 = () => {
+const DetailEventSP = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const location = useLocation();
@@ -31,7 +30,6 @@ const DetailEventCard2 = () => {
     <div className="max-w-4xl mx-auto mt-8">
       <div className="bg-white rounded-lg shadow-md">
         <div className="flex justify-between items-center p-4">
-          <Link to="/dash"><Button>Back</Button></Link>
           <h2 className="text-2xl font-semibold text-gray-800">{event.name}</h2>
           <p className="text-sm text-gray-600">{event.cityName}</p>
         </div>
@@ -99,4 +97,4 @@ const DetailEventCard2 = () => {
   );
 };
 
-export default DetailEventCard2;
+export default DetailEventSP;

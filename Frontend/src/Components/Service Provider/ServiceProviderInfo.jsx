@@ -7,7 +7,7 @@ const ServiceProviderForm = () => {
     ServiceAgencyName: "",
     servicesOffered: "",
     mobileNumber: "",
-    email: "",
+    email: localStorage.getItem("email"),
   });
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ const ServiceProviderForm = () => {
         console.log("Form submitted successfully: ", response.data);
       })
       .catch((err) => {
-        console.log("Form is not submitted",err);
+        console.log("Form is not submitted", err);
       });
     console.log(formData);
   };
@@ -54,7 +54,7 @@ const ServiceProviderForm = () => {
           <input
             type="text"
             id="serviceAgencyName"
-            name="serviceAgencyName"
+            name="ServiceAgencyName"
             value={formData.ServiceAgencyName}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-md px-3 py-2"
@@ -95,7 +95,7 @@ const ServiceProviderForm = () => {
             required
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="email" className="block font-medium mb-1">
             Email Address
           </label>
@@ -108,7 +108,7 @@ const ServiceProviderForm = () => {
             className="w-full border border-gray-300 rounded-md px-3 py-2"
             required
           />
-        </div>
+        </div> */}
         <button
           type="submit"
           className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

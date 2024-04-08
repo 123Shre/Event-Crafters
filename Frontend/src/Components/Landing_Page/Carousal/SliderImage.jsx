@@ -6,38 +6,34 @@ import bg5 from "/bg5.jpg";
 
 export default [
   {
-    title: "First Slide",
-    description: "This is the first slider Image of our carousel",
+    title: "Plan Your Dream Event",
+    description: "Effortlessly manage any occasion - conferences, parties, workshops, and more",
     urls: bg1,
   },
   {
-    title: "Second Slide",
-    description: "This is the second slider Image of our carousel",
+    title: "Streamlined Event Management",
+    description: "From planning to execution, our system simplifies every step",
     urls: bg2,
   },
   {
-    title: "Third Slide",
-    description: "This is the Third slider Image of our carousel",
+    title: "Amplify Audience Participation",
+    description: "Drive engagement and keep attendees actively involved",
     urls: bg3,
   },
   {
-    title: "Fourth Slide",
-    description: "This is the Fourth slider Image of our carousel",
+    title: "Celebrate in Style",
+    description: "Host a flawless event with our comprehensive management system",
     urls: bg4,
   },
   {
-    title: "Fifth Slide",
-    description: "This is the Fifth slider Image of our carousel",
+    title: "Elevate Your Events",
+    description: "Take your events to the next level with our comprehensive solution",
     urls: bg5,
   },
+ 
   {
-    title: "Sixth Slide",
-    description: "This is the Sixth slider Image of our carousel",
-    urls: "https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg",
-  },
-  {
-    title: "Seventh Slide",
-    description: "This is the Seventh slider Image of our carousel",
+    title: "Host a Powerful Conference",
+    description: "Connect attendees, showcase brands, and drive results",
     urls: "https://mdbootstrap.com/img/Photos/Slides/img%20(102).jpg",
   },
 ];

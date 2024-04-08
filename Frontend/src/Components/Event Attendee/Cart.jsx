@@ -8,44 +8,67 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-import { Elements } from "@stripe/react-stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Link } from "react-router-dom";
 const stripePromise = loadStripe(
   `pk_test_51OyakHSE0pec6OUZ4SPFZmDvcA9KbhJTqU51aSC9tDFMFGRnCD6VesQBWOEaMAxueMhsbT4rnkufvRYLSOfNas7200jRP7SYOi`
 );
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
-  console.log(cart);
+  // console.log(cart);
   const handleRemoveItem = (itemId) => {
     removeFromCart(itemId);
   };
 
   const handleCheckout = async () => {
     try {
-      
-      const response = await fetch("http://localhost:3000/create-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: cart,
-          // Include any other necessary data for the checkout session
-        }),
-      });
-
-      const session = await response.json();
+      const response = await fetch(
+        "http://localhost:3000/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            items: cart,
+          }),
+        }
+      );
 
       if (response.ok) {
-        // Redirect the user to the Stripe checkout page
-        const stripe = await stripePromise;
-        stripe.redirectToCheckout({ sessionId: session.id });
+        const session = await response.json();
+
+        // Create the order in the backend
+        const orderResponse = await fetch(
+          "http://localhost:3000/attendee/makeorder",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: sessionStorage.getItem("email"),
+              cart: cart,
+              totalPrice: calculateTotalPrice(),
+            }),
+          }
+        );
+
+        if (orderResponse.ok) {
+          const stripe = await stripePromise;
+          stripe.redirectToCheckout({ sessionId: session.id });
+        } else {
+          const orderError = await orderResponse.text();
+          console.error("Error creating order:", orderError);
+        }
       } else {
-        console.error("Error creating checkout session:", session.error);
+        const errorText = await response.text();
+        console.error("Error creating checkout session:", errorText);
       }
     } catch (error) {
-      console.error("Error creating checkout session:", error);
+      console.error("Error creating checkout session or order:", error);
     }
   };
 
@@ -59,6 +82,14 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link to="/dash">
+        <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          ⬅Back
+        </button>
+      </Link>
       {cart.length > 0 ? (
         <>
           <div className="flex flex-row">
@@ -72,6 +103,7 @@ const Cart = () => {
           <Grid container spacing={2}>
             {cart.map((item, index) => (
               <Grid item xs={12} key={index}>
+                {/* {  console.log("Cart Item"+item._id) }1 */}
                 <Card className="rounded-lg shadow-md">
                   <CardContent className="flex justify-between items-center p-4">
                     <Grid container spacing={2}>
@@ -90,7 +122,7 @@ const Cart = () => {
                             size="small"
                             disabled={item.quantity === 1}
                             onClick={() =>
-                              handleUpdateQuantity(item.id, item.quantity - 1)
+                              handleUpdateQuantity(item._id, item.quantity - 1)
                             }
                             // Adjust spacing as needed
                           >
@@ -104,7 +136,7 @@ const Cart = () => {
                             color="primary"
                             size="small"
                             onClick={() =>
-                              handleUpdateQuantity(item.id, item.quantity + 1)
+                              handleUpdateQuantity(item._id, item.quantity + 1)
                             }
                             className="ml-1 px-1" // Adjust spacing as needed
                           >
@@ -125,7 +157,7 @@ const Cart = () => {
                       variant="outlined"
                       color="error"
                       size="small"
-                      onClick={() => handleRemoveItem(item.id)}
+                      onClick={() => handleRemoveItem(item._id)}
                       className="absolute bottom-2 right-2 p-2" // Adjust positioning as needed
                     >
                       Remove

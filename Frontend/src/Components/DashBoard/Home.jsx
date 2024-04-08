@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -6,23 +7,38 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import React from "react";
+
 import { Link } from "react-router-dom";
+// import EventList from "../Event Creater/AcceptReject/EventList";
+import axios from "axios";
 
 const Home = () => {
+  const [events, setEvents] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchEvents = async () => {
+  //     try {
+  //       const response = await axios.get("/api/events/allevents");
+  //       setEvents(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching events:", error);
+  //     }
+  //   };
+
+  //   fetchEvents();
+  // }, []);
   return (
     <div>
       <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-6">
         <div className="grid gap-4">
           <div className="flex items-center gap-4">
-            <Button
+            {/* <Button
               startIcon={<ArrowBackIcon />}
               variant="outlined"
               size="small"
             >
               Back
-            </Button>
+            </Button> */}
             <Typography variant="h5" component="h1" className="font-semibold">
               Event Creator
               <span className="font-normal text-gray-500 dark:text-gray-400">
@@ -38,7 +54,10 @@ const Home = () => {
               <Link to="/ev1">Create Event</Link>
             </Button>
           </div>
-          <Card className="">
+
+          {/* <EventList events={events} /> */}
+
+          {/* <Card className="">
             <CardHeader
               title="Summer Music Fest"
               subheader="June 25-26, 2022"
@@ -114,7 +133,7 @@ const Home = () => {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </main>
     </div>

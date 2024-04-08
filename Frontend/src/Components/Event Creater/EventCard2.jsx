@@ -57,7 +57,7 @@ const Card = ({event}) => {
             {event.cityName}
           </div>
           <div className="space-y-2">
-         {   console.log(event)}
+        
             {/* <Link
               to={{
                 pathname: "/de2",

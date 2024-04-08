@@ -17,18 +17,19 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData.email, formData.password);
+      // console.log(formData.email, formData.password);
       const response = await axios.post(
         "http://localhost:3000/loginreg/login",
         formData
       );
       const data = response.data;
       const accessToken = data.accessToken;
-      console.log(data);
+      // console.log(data);
       if (data.status === "ok") {
-        localStorage.setItem("accessToken", accessToken);
-        console.log(localStorage.getItem("accessToken"));
-        console.log("Login Successful", data);
+        sessionStorage.setItem("accessToken", accessToken);
+        sessionStorage.setItem("email", formData.email);
+        // console.log(localStorage.getItem("accessToken"));
+        // console.log("Login Successful", data);
         navigate("/dash");
       }
     } catch (error) {

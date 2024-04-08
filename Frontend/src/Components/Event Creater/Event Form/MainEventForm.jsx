@@ -14,7 +14,7 @@ const SuccessAlert = () => {
   return (
     <>
       <Alert variant="filled" severity="success">
-        This is a filled success Alert.
+        You Successfully created the event!
       </Alert>
       ;
     </>
@@ -67,19 +67,35 @@ const MainEventForm = () => {
 
   const handleSubmit = async () => {
     // Perform form submission logic here, such as sending data to a server
-
+console.log(sessionStorage.getItem("token"));
     const request = await axios
-      .post("http://localhost:3000/eventCreater/event_create", eventData)
+      .post("http://localhost:3000/eventCreater/event_create", eventData, {
+        headers: { Authorization: sessionStorage.getItem("accessToken") },
+      })
       .then((res) => {
         console.log("Form submitted successfully: ", res.data);
         setSuccessAlert(true);
-        navigate("/event-creater");
+        setActiveStep(0);        
+        navigate("/ev1");
+        setEventData({  // Reset all input values to null after form submission
+          images: [],
+          name: "",
+          description: "",
+          organizerName: "",
+          ageRestrictions: "",
+          cityName: "",
+          dateAndTime: "",
+          priceType: "Free",
+          price: "",
+          contracts: [],
+          address: "",
+        });
       })
       .catch((err) => {
         console.error("Error while submitting form: ", err);
       });
   };
-  console.log(successAlert);
+  // console.log(successAlert);
   const handleCloseAlert = () => {
     setOpenAlert(false);
   };
@@ -120,7 +136,7 @@ const MainEventForm = () => {
   return (
     <>
       {successAlert && <SuccessAlert />}
-     
+
       <div className="event-form shadow-2xl rounded-2xl ml-6 mr-6 max-h-fit mt-1 pb-14">
         <h1 className="text-4xl font-bold text-center mt-2 ">
           Event Creation Form
