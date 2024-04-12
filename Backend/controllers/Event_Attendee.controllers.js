@@ -28,6 +28,9 @@ const AttendeeControllers = {
       }
       res.status(200).json(orders);
     } catch (error) {
+      if(res.status(404)){
+        return res.status(404).json({ message: "No orders found" });
+      }
       res.status(500).json({ error: error.message });
     }
   },

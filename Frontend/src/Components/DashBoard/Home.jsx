@@ -11,6 +11,8 @@ import {
 import { Link } from "react-router-dom";
 // import EventList from "../Event Creater/AcceptReject/EventList";
 import axios from "axios";
+import QuotationList from "../Event Creater/AcceptReject/EventQuotation";
+import EventQuotations from "../Event Creater/AcceptReject/EventQuot1";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -29,7 +31,7 @@ const Home = () => {
   // }, []);
   return (
     <div>
-      <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-6">
+      <main className="flex-1 bg-green-200 flex flex-col  gap-4 p-4 md:gap-8 md:p-6 rounded-lg">
         <div className="grid gap-4">
           <div className="flex items-center gap-4">
             {/* <Button
@@ -41,9 +43,7 @@ const Home = () => {
             </Button> */}
             <Typography variant="h5" component="h1" className="font-semibold">
               Event Creator
-              <span className="font-normal text-gray-500 dark:text-gray-400">
-                {" - Manage Events"}
-              </span>
+             
             </Typography>
             <Button
               variant="contained"
@@ -134,6 +134,7 @@ const Home = () => {
               </div>
             </CardContent>
           </Card> */}
+          <EventQuotations/>
         </div>
       </main>
     </div>

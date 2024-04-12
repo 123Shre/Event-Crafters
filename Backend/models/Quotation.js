@@ -1,20 +1,23 @@
 import { Schema, model } from "mongoose";
 
 const Quotation = new Schema({
-
   eventId: {
     type: Schema.Types.ObjectId,
     ref: "Event",
     required: true,
   },
-  // Consider removing unique constraint if unnecessary for your use case
   email: {
     type: String,
     required: true,
   },
+  budget: Number,
   serviceName: String,
   amount: Number,
-  
+  status: {
+    type: String,
+    enum: ["pending", "accepted", "rejected"],
+    default: "pending",
+  },
   createdAt: { type: Date, default: Date.now },
   serviceProvidedBy: {
     type: Schema.Types.ObjectId,

@@ -124,7 +124,7 @@ const Cart = () => {
                             onClick={() =>
                               handleUpdateQuantity(item._id, item.quantity - 1)
                             }
-                            // Adjust spacing as needed
+                            
                           >
                             -
                           </Button>
@@ -138,7 +138,7 @@ const Cart = () => {
                             onClick={() =>
                               handleUpdateQuantity(item._id, item.quantity + 1)
                             }
-                            className="ml-1 px-1" // Adjust spacing as needed
+                            className="ml-1 px-1" 
                           >
                             +
                           </Button>
@@ -158,7 +158,7 @@ const Cart = () => {
                       color="error"
                       size="small"
                       onClick={() => handleRemoveItem(item._id)}
-                      className="absolute bottom-2 right-2 p-2" // Adjust positioning as needed
+                      className="absolute bottom-2 right-2 p-2" 
                     >
                       Remove
                     </Button>

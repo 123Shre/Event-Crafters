@@ -26,6 +26,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Success from "./Components/Final Pages/Success";
 import Failed from "./Components/Final Pages/Failed";
 import ReviewEvent from "./Components/DashBoard/Review";
+import QuotationList from "./Components/Event Creater/AcceptReject/EventQuotation";
 // import EventList from "./Components/Event Creater/AcceptReject/EventList";
 
 // import { config } from "dotenv";
@@ -48,6 +49,7 @@ function App() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+  const eventId = '660d1d9c39172c6359372dfa';
   return (
     <>
       <Elements stripe={stripePromise}>
@@ -75,6 +77,10 @@ function App() {
           <Route path="/failed" element={<Failed />} />
 
           {/* <Route path="/el" element={<EventList />} /> */}
+
+
+
+          <Route path="/quli" element={<QuotationList eventId={eventId}/>} />
         </Routes>
       </Elements>
     </>

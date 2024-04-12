@@ -35,6 +35,7 @@ const MainEventForm = () => {
     price: "",
     contracts: [],
     address: "",
+    email: sessionStorage.getItem("email"),
   });
   const [openAlert, setOpenAlert] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
@@ -67,7 +68,7 @@ const MainEventForm = () => {
 
   const handleSubmit = async () => {
     // Perform form submission logic here, such as sending data to a server
-console.log(sessionStorage.getItem("token"));
+    console.log(sessionStorage.getItem("token"));
     const request = await axios
       .post("http://localhost:3000/eventCreater/event_create", eventData, {
         headers: { Authorization: sessionStorage.getItem("accessToken") },
@@ -75,9 +76,10 @@ console.log(sessionStorage.getItem("token"));
       .then((res) => {
         console.log("Form submitted successfully: ", res.data);
         setSuccessAlert(true);
-        setActiveStep(0);        
+        setActiveStep(0);
         navigate("/ev1");
-        setEventData({  // Reset all input values to null after form submission
+        setEventData({
+          // Reset all input values to null after form submission
           images: [],
           name: "",
           description: "",
@@ -141,7 +143,16 @@ console.log(sessionStorage.getItem("token"));
         <h1 className="text-4xl font-bold text-center mt-2 ">
           Event Creation Form
         </h1>
+
         <div className="mb-2">
+          {/* Add the back button here */}
+          <Button
+            variant="contained"
+            onClick={() => navigate("/dash")}
+            sx={{ mb: 2 }}
+          >
+            ⬅Back to Dashboard
+          </Button>
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>

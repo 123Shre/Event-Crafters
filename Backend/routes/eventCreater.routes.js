@@ -14,10 +14,16 @@ import { AuthMiddleware } from "../middleware/authtoken.js";
 //     console.log(req.body);  
 //   }
 // );
-
+router.post("/events",eventCreatorControllers.emEvents)
 router.post("/allcontracts",eventCreatorControllers.allcontracts)
 router.post("/event_create",AuthMiddleware, eventCreatorControllers.createEvent);
 router.post("/allevents",eventCreatorControllers.allevents)
+// router.get("/quotations/:eventId", eventCreatorControllers.quotationAccRej);
+// router.patch("/quotations/:quotationId", eventCreatorControllers.AllQuot);
+router.get("/quotations/:eventId", eventCreatorControllers.getQuotations);
+router.patch("/quotations/:quotationId", eventCreatorControllers.updateQuotationStatus);
+router.get("/event/:eventId", eventCreatorControllers.getEvent);
+
 // try {
 // Log req.files for debugging
 // console.log(upload.array("images", 5))

@@ -28,7 +28,7 @@ const DetailEventSP = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-8">
-      <div className="bg-white rounded-lg shadow-md">
+      <div className=" rounded-lg shadow-md" style="background-color:red">
         <div className="flex justify-between items-center p-4">
           <h2 className="text-2xl font-semibold text-gray-800">{event.name}</h2>
           <p className="text-sm text-gray-600">{event.cityName}</p>

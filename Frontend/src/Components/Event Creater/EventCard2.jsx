@@ -5,32 +5,33 @@ import {
   faClock,
   faMapMarker,
 } from "@fortawesome/free-solid-svg-icons";
-import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
-const Card = ({event}) => {
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
+
+const Card = ({ event }) => {
   //  const { eventname, location,_id, } = event;
   const navigate = useNavigate();
-   const dateTime = new Date(event.dateAndTime);
-   const formattedDate = dateTime.toLocaleDateString("en-US", {
-     year: "numeric",
-     month: "long",
-     day: "numeric",
-   });
-   const formattedTime = dateTime.toLocaleTimeString("en-US", {
-     hour: "numeric",
-     minute: "2-digit",
-     hour12: true,
-   });
+  const dateTime = new Date(event.dateAndTime);
+  const formattedDate = dateTime.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const formattedTime = dateTime.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
 
-   const handleonclick = () => {
-     if(event){
-      navigate(`/de2`, {state: {event}})
-     }
-     else{
-       console.log("no event")
-     }
-   }
-  // console.log(event)
+  const handleOnclick = () => {
+    if (event) {
+      navigate(`/de2`, { state: { event } });
+    } else {
+      console.log("no event");
+    }
+  };
+
+  const isEventCompleted = moment(dateTime).isBefore(moment());
   return (
     <>
       <div className="mx-auto min-w-72 max-w-xs space-y-6 shadow-lg bg-orange-50 rounded-3xl relative top-8 ml-3">
@@ -57,20 +58,19 @@ const Card = ({event}) => {
             {event.cityName}
           </div>
           <div className="space-y-2">
-        
-            {/* <Link
-              to={{
-                pathname: "/de2",
-                state: { event },
-              }}
-            > */}
-            
+            {isEventCompleted ? (
+              <button className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-slate-500 rounded-md shadow-smfocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" disabled>
+                Completed
+              </button>
+            ) : (
               <button
                 className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 type="submit"
-             onClick={handleonclick} >
+                onClick={handleOnclick}
+              >
                 Book Now
               </button>
+            )}
             {/* </Link> */}
           </div>
         </div>

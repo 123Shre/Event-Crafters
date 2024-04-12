@@ -78,7 +78,9 @@ const Registration = () => {
     if (!formData.password) {
       errors.password = "Password is required";
     }
-
+    if (!formData.password || formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+    }
     // Check if confirm password is empty
     if (!formData.cpassword) {
       errors.cpassword = "Confirm password is required";

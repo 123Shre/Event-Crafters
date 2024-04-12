@@ -1,80 +1,8 @@
-
 import { generateAccessToken } from "../middleware/authtoken.js";
 import Event from "../models/Event.js";
+import Quotation_Schema from "../models/Quotation.js";
 
 const eventCreatorControllers = {
-  // registration: async (req, res) => {
-  //   const { name, email, phoneNumber, password, address } = req.body;
-
-  //   try {
-  //     const eCreaterExist = await Event_Creater_Schema.findOne({ email });
-
-  //     if (eCreaterExist) {
-  //       return res
-  //         .status(400)
-  //         .json({ message: "Event Creator already exists" });
-  //     }
-
-  //     const hashedPassword = await bcrypt.hash(password, 10); // Use bcrypt to hash the password
-  //     const eventCreater = await Event_Creater_Schema.create({
-  //       name,
-  //       email,
-  //       phoneNumber,
-  //       password: hashedPassword,
-  //       address,
-  //     });
-  //     // const accessToken = generateAccessToken(eventCreater);
-  //     return res.status(201).json({ message: "Event Creator created" });
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({ message: "Internal Server Error" });
-  //   }
-  // },
-
-  // login: async (req, res) => {
-  //   try {
-  //     const { email, password } = req.body;
-  //     const creater = await Event_Creater_Schema.findOne({ email });
-
-  //     if (!creater) {
-  //       return res.status(404).json({ message: "User Not found" });
-  //     }
-
-  //     const passwordMatch = await bcrypt.compare(password, creater.password);
-
-  //     if (!passwordMatch) {
-  //       return res.status(404).json({ message: "Password is incorrect" });
-  //     }
-  //     const accessToken = generateAccessToken(creater);
-  //     return res
-  //       .status(200)
-  //       .json({ status: "ok", message: "Success", accessToken });
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({ message: "Internal Server Error" });
-  //   }
-  // },
-
-  // eventCreation: async (req, res) => {
-  //   const { name, email, phoneno, address, eventname, eventdescription } =
-  //     req.body;
-  //   try {
-  //     const eventCreater = await Event_Creater_Schema.create({
-  //       name,
-  //       email,
-  //       phoneno,
-  //       address,
-  //       eventname,
-  //       eventdescription,
-  //     });
-
-  //     return res.status(201).json({ message: "Event Created" });
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).json({ message: "Internal Server Error" });
-  //   }
-  // },
-  // app.get('/events', async (req, res) => {
   eventSer: async (req, res) => {
     try {
       const events = await Event.find().populate(
@@ -87,10 +15,19 @@ const eventCreatorControllers = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  emEvents: async (req, res) => {
+    const { email } = req.body;
+    try {
+      const events = await Event.find({ email });
+      res.json(events);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
   createEvent: async (req, res) => {
     try {
-      console.log(req.body);
+      // console.log(req.body);
       const {
         address,
         ageRestrictions,
@@ -99,6 +36,7 @@ const eventCreatorControllers = {
         dateAndTime,
         description,
         name,
+        email,
         organizerName,
         price,
         priceType,
@@ -117,6 +55,7 @@ const eventCreatorControllers = {
         dateAndTime,
         description,
         // images,
+        email,
         name,
         organizerName,
         price,
@@ -146,11 +85,84 @@ const eventCreatorControllers = {
       res.status(500).json({ error: "Failed to fetch events" });
     }
   },
+
+  quotationAccRej: async (req, res) => {
+    try {
+      const eventId = req.params.eventId;
+      const quotations = await Quotation_Schema.find({ eventId });
+      res.status(200).json(quotations);
+    } catch (err) {
+      console.error("Error fetching quotations:", err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  AllQuot: async (req, res) => {
+    try {
+      const quotationId = req.params.quotationId;
+      const { status } = req.body;
+      const updatedQuotation = await Quotation_Schema.findByIdAndUpdate(
+        quotationId,
+        { status },
+        { new: true }
+      );
+      res.status(200).json(updatedQuotation);
+    } catch (err) {
+      console.error("Error updating quotation:", err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
+  updateQuotationStatus: async (req, res) => {
+    try {
+      const quotationId = req.params.quotationId;
+      const { status } = req.body;
+// console.log(req.body)
+      // Check if the status is valid
+      if (!["pending", "accepted", "rejected"].includes(status)) {
+        return res.status(400).json({ message: "Invalid status" });
+      }
+
+      const updatedQuotation = await Quotation_Schema.findByIdAndUpdate(
+        quotationId,
+        { status },
+        { new: true }
+      );
+
+      if (!updatedQuotation) {
+        return res.status(404).json({ message: "Quotation not found" });
+      }
+console.log(updatedQuotation)
+      res.status(200).json(updatedQuotation);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  },
+  getEvent: async (req, res) => {
+    try {
+      const eventId = req.params.eventId;
+      const event = await Event.findById(eventId);
+      // console.log(event);
+      if (!event) {
+        return res.status(404).json({ message: "Event not found" });
+      }
+      res.status(200).json(event);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  },
+
+  getQuotations: async (req, res) => {
+    try {
+      const eventId = req.params.eventId;
+      const quotations = await Quotation_Schema.find({ eventId });
+      res.status(200).json(quotations);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server Error" });
+    }
+  },
 };
 
 export default eventCreatorControllers;
-// Convert image files to binary format
-// const images = req.files.map((file) => ({
-//   data: file.buffer,
-//   contentType: file.mimetype,
-// }));

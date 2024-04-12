@@ -1,15 +1,15 @@
 // ReviewForm.jsx
-import React, { useState } from 'react';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import axios from "axios";
+import Button from "@material-ui/core/Button";
 const ReviewForm = ({ eventId, email }) => {
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/attendee/createreview', {
+      await axios.post("http://localhost:3000/attendee/createreview", {
         eventId,
         email,
         rating,
@@ -17,19 +17,20 @@ const ReviewForm = ({ eventId, email }) => {
       });
       // Reset the form after successful submission
       setRating(0);
-      setComment('');
+      setComment("");
     } catch (error) {
-      console.error('Error creating review:', error);
+      console.error("Error creating review:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="rating">Rating:</label>
+        <label htmlFor="rating">Rating:</label>{" "}
         <input
           type="number"
           id="rating"
+          className="border-2 border-gray-300 rounded-md p-1"
           min="1"
           max="5"
           value={rating}
@@ -37,16 +38,23 @@ const ReviewForm = ({ eventId, email }) => {
           required
         />
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="comment">Comment:</label>
+
         <textarea
           id="comment"
+          className="border-2 border-gray-300 rounded-md p-1"
+          rows={2}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           required
         ></textarea>
       </div>
-      <button type="submit">Submit Review</button>
+      <div className="mt-4">
+        <Button color="primary" variant="contained" type="submit">
+          Submit Review
+        </Button>
+      </div>
     </form>
   );
 };

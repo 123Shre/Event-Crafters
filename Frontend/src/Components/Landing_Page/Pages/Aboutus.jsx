@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../../Navbar/Navbar";
-
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PersonIcon from '@mui/icons-material/Person';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const AboutUs = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 pb-16">
+      <div className="bg-green-200 pb-16">
         <div className="container mx-auto max-w-screen-xl flex flex-wrap justify-center items-center min-h-screen">
           <div className="w-full md:w-1/2 px-4 md:px-8">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
@@ -19,21 +21,21 @@ const AboutUs = () => {
             </p>
 
             <div className="flex items-center mb-8">
-              <i className="fa fa-check-circle text-green-500 mr-4"></i>
+             <CheckCircleOutlineIcon/>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Simplify event creation and management.
               </p>
             </div>
 
             <div className="flex items-center mb-8">
-              <i className="fa fa-users text-blue-500 mr-4"></i>
+             <PersonIcon/>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Connect with a diverse range of service providers.
               </p>
             </div>
 
             <div className="flex items-center mb-8">
-              <i className="fa fa-calendar-alt text-purple-500 mr-4"></i>
+              <CalendarMonthIcon/>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Discover unique and exciting events.
               </p>
@@ -49,7 +51,7 @@ const AboutUs = () => {
 
           <div className="w-full md:w-1/2 hidden md:block">
             <img
-              src="/about-us-image.jpg"
+              src="/aboutus.jpg"
               alt="Event Crafters Illustration"
               className="object-cover rounded-lg h-full"
             />

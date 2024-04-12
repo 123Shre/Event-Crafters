@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ServiceProviderForm = () => {
   const [formData, setFormData] = useState({
@@ -7,9 +8,9 @@ const ServiceProviderForm = () => {
     ServiceAgencyName: "",
     servicesOffered: "",
     mobileNumber: "",
-    email: localStorage.getItem("email"),
+    email: sessionStorage.getItem("email"),
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -22,11 +23,17 @@ const ServiceProviderForm = () => {
       .post("http://localhost:3000/sp/spform", formData)
       .then((response) => {
         console.log("Form submitted successfully: ", response.data);
+        navigate("/dash");
       })
       .catch((err) => {
-        console.log("Form is not submitted", err);
+        if (err.response.status === 409) {
+          alert("Service Provider already exists");
+          navigate("/dash");``
+        } else {
+          alert(`Something went wrong! ${err.response.data.message}`);
+        }
       });
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (
@@ -95,20 +102,13 @@ const ServiceProviderForm = () => {
             required
           />
         </div>
-        {/* <div className="mb-4">
-          <label htmlFor="email" className="block font-medium mb-1">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-3 py-2"
-            required
-          />
-        </div> */}
+        <button
+            type="button"
+            onClick={() => navigate(-1)} // Go back one page in history
+            className="px-4 py-2 text-base font-medium text-gray-700 bg-white rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Back
+          </button>
         <button
           type="submit"
           className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

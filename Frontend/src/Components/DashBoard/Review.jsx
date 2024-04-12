@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReviewForm from "../Event Attendee/ReviewForm";
-
+import moment from "moment";
 const ReviewEvent = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,34 +34,23 @@ const ReviewEvent = () => {
   useEffect(() => {
     fetchBookedEvents();
   }, []);
-  // event.cart.map((cartItem) => {
-  //   const dateTime = new Date(cartItem.dateAndTime);
-  //   const formattedDate = dateTime.toLocaleDateString("en-US", {
-  //     year: "numeric",
-  //     month: "long",
-  //     day: "numeric",
-  //   });
-  //   const formattedTime = dateTime.toLocaleTimeString("en-US", {
-  //     hour: "numeric",
-  //     minute: "2-digit",
-  //     hour12: true,
-  //   });
+
 
   return (
     <>
-      <div className="container mx-auto px-4">
+      <div className="container bg-green-200 p-6 rounded-lg  mx-auto ">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-semibold">Booked Events</h2>
         </div>
         {isLoading ? (
           <p>Loading booked events...</p>
         ) : error ? (
-          <p>Error fetching events: {error.message}</p>
+          <p>No event Found </p>
         ) : events.length === 0 ? (
           <p>You don't have any booked events yet.</p>
         ) : (
           events.map((event) => (
-            <div key={event._id} className="border p-4 rounded-md mb-4">
+            <div key={event._id} className="border bg-slate-400 p-4 rounded-md mb-4">
               <div className="mt-2">
                 <h4 className="text-lg font-semibold mb-2">Cart Items:</h4>
                 <ul className="list-disc pl-4">
@@ -104,10 +93,9 @@ const ReviewEvent = () => {
                           )}
                         </div>
                         <div>
-                          <ReviewForm
-                            eventId={event._id}
-                            email={sessionStorage.getItem("email")}
-                          />
+                        {moment(cartItem.dateAndTime).isBefore(moment()) && (
+                            <ReviewForm eventId={event._id} email={sessionStorage.getItem("email")} />
+                          )}
                         </div>
                       </div>
                     </li>
@@ -115,7 +103,7 @@ const ReviewEvent = () => {
                 </ul>
               </div>
               {event.createdAt && (
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-white">
                   Booked on: {new Date(event.createdAt).toLocaleString()}
                 </p>
               )}

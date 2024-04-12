@@ -53,16 +53,16 @@ const Attendee = () => {
   );
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto rounded-lg p-10 bg-green-200">
       <div className="flex items-center justify-between mb-4">
-        <div className="search-input">
-          <label htmlFor="search" className="font-semibold mr-2">
+        <div className="search-input border-2 border-green-400 rounded-md">
+          {/* <label htmlFor="search" className="font-semibold mr-2">
             Search Events:
-          </label>
+          </label> */}
           <input
             type="text"
             id="search"
-            placeholder="Search by event name"
+            placeholder="Search Events..."
             value={searchQuery}
             onChange={handleSearch}
             className="py-2 px-4 border rounded-md"
@@ -76,7 +76,7 @@ const Attendee = () => {
             id="sort"
             value={sortBy}
             onChange={(e) => sortEvents(e.target.value)}
-            className="py-2 px-4 border rounded-md"
+            className="py-2 px-4 rounded-md border-2 border-green-400"
           >
             <option value="">-- Select Sorting --</option>
             <option value="price">Price</option>

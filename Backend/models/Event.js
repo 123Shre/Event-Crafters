@@ -1,18 +1,12 @@
 import { Schema, model } from "mongoose";
 
 const eventSchema = new Schema({
-  // images: [
-  //   {
-  //     data: { type: Buffer, required: true },
-  //     contentType: { type: String, required: true },
-  //   },
-  // ], // Array of image URLs
-
   images: [String],
   name: {
     type: String,
     required: true,
   },
+  email: { type: String, required: true },
   description: {
     type: String,
     required: true,
@@ -49,6 +43,7 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+  quotations: [{ type: Schema.Types.ObjectId, ref: "Quotation_Schema" }],
 });
 
 const Event = model("Event", eventSchema);
