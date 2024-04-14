@@ -145,11 +145,11 @@ const Cart = () => {
                         </Grid>
                       </Grid>
                       <Grid item xs={1}>
-                        <Typography variant="body1">${item.price}</Typography>
+                        <Typography variant="body1">&#8377;{item.price}</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body1">
-                          ${(item.price * item.quantity).toFixed(2)}
+                        &#8377;{(item.price * item.quantity).toFixed(2)}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -169,7 +169,7 @@ const Cart = () => {
             <div className="flex flex-row gap-4 pt-4 p-3">
               <div className="font-bold ">Total Price:</div>
               <div className="flex-grow mr-96">
-                <p className="text-xl">${calculateTotalPrice().toFixed(2)}</p>
+                <p className="text-xl">&#8377;{calculateTotalPrice().toFixed(2)}</p>
               </div>
               <div className="ml-96">
                 <Button

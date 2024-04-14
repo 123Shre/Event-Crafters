@@ -27,6 +27,7 @@ import Success from "./Components/Final Pages/Success";
 import Failed from "./Components/Final Pages/Failed";
 import ReviewEvent from "./Components/DashBoard/Review";
 import QuotationList from "./Components/Event Creater/AcceptReject/EventQuotation";
+import ReviewList from "./Components/Event Attendee/ReviewList";
 // import EventList from "./Components/Event Creater/AcceptReject/EventList";
 
 // import { config } from "dotenv";
@@ -75,6 +76,7 @@ function App() {
           <Route path="/review" element={<ReviewEvent />} />
           <Route path="/success" element={<Success />} />
           <Route path="/failed" element={<Failed />} />
+          <Route path="/reviews/:eventId" element={<ReviewList/>} />
 
           {/* <Route path="/el" element={<EventList />} /> */}
 

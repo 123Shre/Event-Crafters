@@ -5,8 +5,9 @@ import {
   faClock,
   faMapMarker,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
+
 
 const Card = ({ event }) => {
   //  const { eventname, location,_id, } = event;
@@ -59,9 +60,11 @@ const Card = ({ event }) => {
           </div>
           <div className="space-y-2">
             {isEventCompleted ? (
-              <button className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-slate-500 rounded-md shadow-smfocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" disabled>
-                Completed
+              <Link to={`/reviews/${event._id}`}>
+              <button className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-slate-500 rounded-md shadow-smfocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+                Reviews
               </button>
+              </Link>
             ) : (
               <button
                 className="w-full mt-2 px-4 py-2 text-base font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

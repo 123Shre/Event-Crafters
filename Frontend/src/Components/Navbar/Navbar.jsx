@@ -15,7 +15,7 @@ const Navbar = () => {
     const token = sessionStorage.getItem("accessToken");
     setIsLoggedIn(!!token);
   }, []);
-  
+
   const [isDash, setIsdash] = useState(false);
   useEffect(() => {
     if (sessionStorage.getItem("accessToken")) {
@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("email");
     setIsLoggedIn(false);
     navigate("/");
   };
@@ -126,8 +127,7 @@ const Navbar = () => {
                   )}
                 </div>
               )}
-              {islanding && (
-                !isLoggedIn &&(
+              {islanding && !isLoggedIn && (
                 <div className="flex items-center">
                   <Link
                     to="/login"
@@ -142,10 +142,9 @@ const Navbar = () => {
                   >
                     Register
                   </Link>
-                </div>)
+                </div>
               )}
             </nav>
-         
 
             <div className="relative">
               {isOpen && isLoggedIn && (

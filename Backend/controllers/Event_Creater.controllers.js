@@ -117,7 +117,7 @@ const eventCreatorControllers = {
       const quotationId = req.params.quotationId;
       const { status } = req.body;
 // console.log(req.body)
-      // Check if the status is valid
+     
       if (!["pending", "accepted", "rejected"].includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
       }

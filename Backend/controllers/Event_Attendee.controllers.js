@@ -52,5 +52,20 @@ const AttendeeControllers = {
         .json({ message: "Error creating review", error: error.message });
     }
   },
+  ReviewsByEventId: async (req, res) => {
+    try {
+      console.log(req.body);
+      const { eventId } = req.body;
+      console.log(eventId);
+      const reviews = await Review.find({ eventId });
+      console.log(reviews);
+      if (!reviews || reviews.length === 0) {
+        return res.status(404).json({ error: "No reviews found" });
+      }
+      res.status(200).json(reviews);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 export default AttendeeControllers;
