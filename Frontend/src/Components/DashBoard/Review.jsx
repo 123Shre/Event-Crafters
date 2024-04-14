@@ -35,7 +35,6 @@ const ReviewEvent = () => {
     fetchBookedEvents();
   }, []);
 
-
   return (
     <>
       <div className="container bg-green-200 p-6 rounded-lg  mx-auto ">
@@ -50,7 +49,10 @@ const ReviewEvent = () => {
           <p>You don't have any booked events yet.</p>
         ) : (
           events.map((event) => (
-            <div key={event._id} className="border bg-slate-400 p-4 rounded-md mb-4">
+            <div
+              key={event._id}
+              className="border bg-slate-400 p-4 rounded-md mb-4"
+            >
               <div className="mt-2">
                 <h4 className="text-lg font-semibold mb-2">Cart Items:</h4>
                 <ul className="list-disc pl-4">
@@ -80,7 +82,7 @@ const ReviewEvent = () => {
                                   month: "long",
                                   day: "numeric",
                                 })}{" "}
-                                at {" "}
+                                at{" "}
                                 {new Date(
                                   cartItem.dateAndTime
                                 ).toLocaleTimeString("en-US", {
@@ -93,8 +95,13 @@ const ReviewEvent = () => {
                           )}
                         </div>
                         <div>
-                        {moment(cartItem.dateAndTime).isBefore(moment()) && (
-                            <ReviewForm eventId={event._id} email={sessionStorage.getItem("email")} />
+                          {moment(cartItem.dateAndTime).isBefore(moment()) && (
+                            <>
+                              <ReviewForm
+                                eventId={cartItem._id}
+                                email={sessionStorage.getItem("email")}
+                              />
+                            </>
                           )}
                         </div>
                       </div>

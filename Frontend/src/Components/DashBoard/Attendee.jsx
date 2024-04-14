@@ -102,8 +102,8 @@ const Attendee = () => {
               minute: "2-digit",
               hour12: true,
             });
-            return (
-              <Card
+            return (<>
+            <Card
                 key={event._id}
                 eventname={event.name}
                 date={formattedDate}
@@ -112,7 +112,7 @@ const Attendee = () => {
                 event={event}
                 onClick={handleClick}
               />
-            );
+           </> );
           })}
         </div>
       ) : (

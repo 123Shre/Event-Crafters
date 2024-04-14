@@ -40,8 +40,8 @@ const Contracts = () => {
     );
   };
   const handleEventClick = (eventId, serviceName) => {
-    const clickedEvent = events.find((event) => event._id === eventId);
-    setClickedEvent({ ...clickedEvent, serviceName });
+    const ClickedEvent = events.find((event) => event._id === eventId);
+    setClickedEvent({ ...ClickedEvent, serviceName });
     setIsDetailsOpen(true); // Open details on click
   };
 
@@ -204,7 +204,16 @@ const EventDetails = ({
 
   return (
     <div className="bg-gray-100 p-4 rounded shadow-md">
-      <h3 className="text-xl font-semibold mb-2">Event Details</h3>
+      <div class="flex justify-between items-center">
+      <h3 class="text-xl font-semibold mb-2 overflow-ellipsis whitespace-nowrap">Event Details</h3>
+      <button
+        className="mix-blend-multiply top-2 right-2 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full"
+        style={{marginLeft:"60rem"}}
+        onClick={onClose}
+      >
+        <CloseIcon/> 
+      </button>
+      </div>
       <ul className="list-disc pl-4">
         <li>Name: {event.name}</li>
         <li>Location: {event.address}</li>
@@ -245,13 +254,7 @@ const EventDetails = ({
         </div>
       )}
       {/* Close button */}
-      <button
-        className="mix-blend-multiply top-2 right-2 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full"
-        style={{marginLeft:"68rem"}}
-        onClick={onClose}
-      >
-        <CloseIcon/> 
-      </button>
+     
     </div>
   );
 };

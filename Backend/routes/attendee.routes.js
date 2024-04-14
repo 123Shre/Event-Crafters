@@ -10,4 +10,5 @@ router.post(
   AttendeeControllers.OrdersByUserEmail
 );
 router.post("/createreview", AttendeeControllers.CreateReview);
+router.post("/reviewsbyeventid", AttendeeControllers.ReviewsByEventId);
 export default router;
