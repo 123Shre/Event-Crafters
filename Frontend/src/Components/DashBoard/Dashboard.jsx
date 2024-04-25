@@ -68,7 +68,7 @@ const DashBoard = () => {
   return (
     <>
     <Navbar/>
-      <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
+      <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] ">
         <Drawer
           variant="permanent"
           className="hidden lg:block"
@@ -80,7 +80,7 @@ const DashBoard = () => {
             },
           }}
         >
-          <div className="flex h-full max-h-screen flex-col">
+          <div className="flex h-full max-h-screen flex-col bg-green-200">
             <div className="flex items-center border-b px-6 h-[60px]">
               <Link className="flex items-center gap-2 font-semibold" href="#">
                 <span>Event Crafters</span>

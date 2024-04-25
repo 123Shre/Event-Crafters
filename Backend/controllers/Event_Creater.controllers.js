@@ -36,12 +36,12 @@ const eventCreatorControllers = {
         dateAndTime,
         description,
         name,
-        email,
         organizerName,
         price,
         priceType,
       } = req.body;
-
+      const email = req.user_email;
+      console.log(email);
       // if (!req.files || !req.files.images) {
       //   return res.status(400).json({ error: "Please upload images" });
       // }
@@ -116,8 +116,8 @@ const eventCreatorControllers = {
     try {
       const quotationId = req.params.quotationId;
       const { status } = req.body;
-// console.log(req.body)
-     
+      // console.log(req.body)
+
       if (!["pending", "accepted", "rejected"].includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
       }
@@ -131,7 +131,7 @@ const eventCreatorControllers = {
       if (!updatedQuotation) {
         return res.status(404).json({ message: "Quotation not found" });
       }
-console.log(updatedQuotation)
+      // console.log(updatedQuotation);
       res.status(200).json(updatedQuotation);
     } catch (err) {
       console.error(err);

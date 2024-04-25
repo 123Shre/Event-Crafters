@@ -14,6 +14,11 @@ const ReviewForm = ({ eventId, email }) => {
         email,
         rating,
         comment,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: sessionStorage.getItem("accessToken"),
+        },
       });
       // Reset the form after successful submission
       setRating(0);
@@ -30,7 +35,7 @@ const ReviewForm = ({ eventId, email }) => {
         <input
           type="number"
           id="rating"
-          className="border-2 border-gray-300 rounded-md p-1"
+          className="border-2 border-orange-200  rounded-md p-1"
           min="1"
           max="5"
           value={rating}
@@ -43,7 +48,7 @@ const ReviewForm = ({ eventId, email }) => {
 
         <textarea
           id="comment"
-          className="border-2 border-gray-300 rounded-md p-1"
+          className="border-2 border-orange-200 rounded-md p-1"
           rows={2}
           value={comment}
           onChange={(e) => setComment(e.target.value)}

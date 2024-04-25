@@ -15,10 +15,7 @@ export const generateAccessToken = (user) => {
 };
 
 export const AuthMiddleware = (req, res, next) => {
-  const token =req.headers.authorization;// Retrieve token from localStorage
-
-
- 
+  const token =req.headers.authorization;
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
@@ -27,7 +24,8 @@ export const AuthMiddleware = (req, res, next) => {
     if (decodedToken.client !== "authorized_client") {
       return res.status(403).json({ error: "Forbidden" });
     }
-    req.user_id = decodedToken.userId; // Change to match your token payload
+    req.user_id = decodedToken.userId;
+    req.user_email = decodedToken.email; 
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized" ,error:error});

@@ -14,10 +14,11 @@ const ReviewEvent = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/attendee/bookedevents",
-        { email: sessionStorage.getItem("email") },
+        { },
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: sessionStorage.getItem("accessToken"),
           },
         }
       );
@@ -51,10 +52,10 @@ const ReviewEvent = () => {
           events.map((event) => (
             <div
               key={event._id}
-              className="border bg-slate-400 p-4 rounded-md mb-4"
+              className="border bg-orange-50 p-4 rounded-md mb-4"
             >
               <div className="mt-2">
-                <h4 className="text-lg font-semibold mb-2">Cart Items:</h4>
+                <h4 className="text-lg font-semibold mb-2">Your Orders</h4>
                 <ul className="list-disc pl-4">
                   {event.cart.map((cartItem) => (
                     <li key={cartItem._id} className="mb-2">
@@ -110,7 +111,7 @@ const ReviewEvent = () => {
                 </ul>
               </div>
               {event.createdAt && (
-                <p className="text-sm text-white">
+                <p className="text-sm text-blue-500">
                   Booked on: {new Date(event.createdAt).toLocaleString()}
                 </p>
               )}

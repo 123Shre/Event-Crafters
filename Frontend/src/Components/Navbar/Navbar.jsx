@@ -154,7 +154,7 @@ const Navbar = () => {
                   aria-orientation="vertical"
                   aria-labelledby="user-menu"
                 >
-                  <a
+                  {/* <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
@@ -167,7 +167,7 @@ const Navbar = () => {
                     role="menuitem"
                   >
                     Settings
-                  </a>
+                  </a> */}
                   <a
                     onClick={handleLogout}
                     href="#"

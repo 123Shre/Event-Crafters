@@ -5,9 +5,8 @@ import eventCreater from "./routes/eventCreater.routes.js";
 import loginreg from "./routes/loginregistration.routes.js";
 import serviceprovider from "./routes/serviceprovider.routes.js";
 import attendee from "./routes/attendee.routes.js";
-import multer from "multer";
 import stripe from "stripe";
-import { AuthMiddleware } from "./middleware/authtoken.js";
+// import { AuthMiddleware } from "./middleware/authtoken.js";
 const app = express();
 app.use(cors());
 

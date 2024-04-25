@@ -19,8 +19,7 @@ const AttendeeControllers = {
   },
   OrdersByUserEmail: async (req, res) => {
     try {
-      const { email } = req.body;
-
+      const email = req.user_email;
       //   console.log(email);
       const orders = await Order.find({ email });
       if (!orders || orders.length === 0) {
@@ -28,7 +27,7 @@ const AttendeeControllers = {
       }
       res.status(200).json(orders);
     } catch (error) {
-      if(res.status(404)){
+      if (res.status(404)) {
         return res.status(404).json({ message: "No orders found" });
       }
       res.status(500).json({ error: error.message });
@@ -36,7 +35,8 @@ const AttendeeControllers = {
   },
   CreateReview: async (req, res) => {
     try {
-      const { eventId, email, rating, comment } = req.body;
+      const { eventId, rating, comment } = req.body;
+      const email = req.user_email;
 
       const review = new Review({
         eventId,
@@ -56,9 +56,9 @@ const AttendeeControllers = {
     try {
       console.log(req.body);
       const { eventId } = req.body;
-      console.log(eventId);
+      // console.log(eventId);
       const reviews = await Review.find({ eventId });
-      console.log(reviews);
+      // console.log(reviews);
       if (!reviews || reviews.length === 0) {
         return res.status(404).json({ error: "No reviews found" });
       }

@@ -53,7 +53,7 @@ const Cart = () => {
               cart: cart,
               totalPrice: calculateTotalPrice(),
             }),
-          }
+          },
         );
 
         if (orderResponse.ok) {

@@ -57,8 +57,9 @@ const Service_Provider_Controllers = {
 
   submitQuotation: async (req, res) => {
     try {
-      const { eventId, ServiceName, amount, budget, email } = req.body;
+      const { eventId, ServiceName, amount, budget } = req.body;
       // console.log(req.body);
+      const email = req.user_email;
       const spuser = await ServiceProvider.findOne({ email });
 
       if (!spuser) {
@@ -72,7 +73,7 @@ const Service_Provider_Controllers = {
         amount,
         email,
       });
-      console.log(quotation);
+      // console.log(quotation);
       await quotation.save();
       await Event.updateOne(
         { _id: eventId },

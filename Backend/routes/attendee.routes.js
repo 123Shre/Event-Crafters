@@ -6,9 +6,9 @@ const router = Router();
 router.post("/makeorder", AttendeeControllers.OrderCreate);
 router.post(
   "/bookedevents",
-//   AuthMiddleware,
+  AuthMiddleware,
   AttendeeControllers.OrdersByUserEmail
 );
-router.post("/createreview", AttendeeControllers.CreateReview);
+router.post("/createreview",AuthMiddleware,AttendeeControllers.CreateReview);
 router.post("/reviewsbyeventid", AttendeeControllers.ReviewsByEventId);
 export default router;

@@ -35,7 +35,7 @@ const MainEventForm = () => {
     price: "",
     contracts: [],
     address: "",
-    email: sessionStorage.getItem("email"),
+    // email: sessionStorage.getItem("email"),
   });
   const [openAlert, setOpenAlert] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
@@ -68,7 +68,7 @@ const MainEventForm = () => {
 
   const handleSubmit = async () => {
     // Perform form submission logic here, such as sending data to a server
-    console.log(sessionStorage.getItem("token"));
+    
     const request = await axios
       .post("http://localhost:3000/eventCreater/event_create", eventData, {
         headers: { Authorization: sessionStorage.getItem("accessToken") },
