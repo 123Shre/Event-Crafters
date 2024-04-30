@@ -18,6 +18,7 @@ const Contracts = () => {
           "http://localhost:3000/eventCreater/allcontracts"
         );
         setEvents(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
       }

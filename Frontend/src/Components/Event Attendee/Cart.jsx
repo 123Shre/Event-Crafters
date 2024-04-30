@@ -11,9 +11,15 @@ import {
 // import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
+// import dotenv from "dotenv";
+// dotenv.config();
+// console.log(process.env.STRIPE_PUBLISHABLE_KEY);
 const stripePromise = loadStripe(
   `pk_test_51OyakHSE0pec6OUZ4SPFZmDvcA9KbhJTqU51aSC9tDFMFGRnCD6VesQBWOEaMAxueMhsbT4rnkufvRYLSOfNas7200jRP7SYOi`
 );
+// const stripePromise = loadStripe(
+//   `${window.env.STRIPE_PUBLISHABLE_KEY}`
+// );
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
@@ -53,7 +59,7 @@ const Cart = () => {
               cart: cart,
               totalPrice: calculateTotalPrice(),
             }),
-          },
+          }
         );
 
         if (orderResponse.ok) {
@@ -124,7 +130,6 @@ const Cart = () => {
                             onClick={() =>
                               handleUpdateQuantity(item._id, item.quantity - 1)
                             }
-                            
                           >
                             -
                           </Button>
@@ -138,18 +143,20 @@ const Cart = () => {
                             onClick={() =>
                               handleUpdateQuantity(item._id, item.quantity + 1)
                             }
-                            className="ml-1 px-1" 
+                            className="ml-1 px-1"
                           >
                             +
                           </Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={1}>
-                        <Typography variant="body1">&#8377;{item.price}</Typography>
+                        <Typography variant="body1">
+                          &#8377;{item.price}
+                        </Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body1">
-                        &#8377;{(item.price * item.quantity).toFixed(2)}
+                          &#8377;{(item.price * item.quantity).toFixed(2)}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -158,7 +165,7 @@ const Cart = () => {
                       color="error"
                       size="small"
                       onClick={() => handleRemoveItem(item._id)}
-                      className="absolute bottom-2 right-2 p-2" 
+                      className="absolute bottom-2 right-2 p-2"
                     >
                       Remove
                     </Button>
@@ -169,7 +176,9 @@ const Cart = () => {
             <div className="flex flex-row gap-4 pt-4 p-3">
               <div className="font-bold ">Total Price:</div>
               <div className="flex-grow mr-96">
-                <p className="text-xl">&#8377;{calculateTotalPrice().toFixed(2)}</p>
+                <p className="text-xl">
+                  &#8377;{calculateTotalPrice().toFixed(2)}
+                </p>
               </div>
               <div className="ml-96">
                 <Button

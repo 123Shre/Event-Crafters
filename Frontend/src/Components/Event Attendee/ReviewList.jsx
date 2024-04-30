@@ -7,12 +7,16 @@ const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-console.log(eventId);
+// console.log(eventId);
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const response = await axios.post('http://localhost:3000/attendee/reviewsbyeventid', { eventId });
-        setReviews(response.data);
+        if (response.data.length === 0) {
+          setReviews([]);
+        } else {
+          setReviews(response.data);
+        }
       } catch (error) {
         setError(error.response.data.error);
       } finally {
