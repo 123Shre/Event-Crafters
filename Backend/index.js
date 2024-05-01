@@ -12,9 +12,9 @@ app.use(cors());
 
 const port = process.env.PORT || 3000;
 const stripeSecretKey =
-  "sk_test_51OyakHSE0pec6OUZbsq918H1UgCkGZa2XUMfIwidILXmnqiSc1VA2g2Ra2d6aJp0Cg26NY7J6DKiQIs8YA3b5dQg00T7CvtEnt";
+  "YOUR_KEY";
 const stripeInstance = stripe(stripeSecretKey);
-// const uri = "mongodb+srv://shreyashamr1308:Qwerty%40123@cluster0.igj6w77.mongodb.net/?retryWrites=true&w=majority&ssl=true";
+
 const uri = "mongodb://0.0.0.0:27017/Event-Management-System";
 connect(uri)
   .then(() => console.log("Connected to MongoDB "))

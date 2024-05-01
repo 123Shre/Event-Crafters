@@ -8,18 +8,14 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-// import { Elements } from "@stripe/react-stripe-js";
+
 import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
-// import dotenv from "dotenv";
-// dotenv.config();
-// console.log(process.env.STRIPE_PUBLISHABLE_KEY);
+
 const stripePromise = loadStripe(
-  `pk_test_51OyakHSE0pec6OUZ4SPFZmDvcA9KbhJTqU51aSC9tDFMFGRnCD6VesQBWOEaMAxueMhsbT4rnkufvRYLSOfNas7200jRP7SYOi`
+  `YOUR_KEY`
 );
-// const stripePromise = loadStripe(
-//   `${window.env.STRIPE_PUBLISHABLE_KEY}`
-// );
+
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
